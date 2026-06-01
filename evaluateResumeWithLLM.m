@@ -1,13 +1,12 @@
 function responseText = evaluateResumeWithLLM(resumeText, jobDescription)
     % =====================================================================
-    % SENİN SON ÜRETTİĞİN GEÇERLİ API ANAHTARIN:
     apiKey = 'KENDİ_ANAHTARINIZI_BURAYA_GİRİN'; 
     % =====================================================================
     
-    % !!! HATA ÇÖZÜMÜ BURADA: Model 'gemini-2.5-flash' olarak güncellendi !!!
+    % Model 'gemini-2.5-flash' olarak seçildi
     apiUrl = ['https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=', apiKey];
     
-    % Prompt (char() dönüşümleri ile %100 güvenli birleştirme)
+    % Prompt (char() dönüşümleri ile güvenli birleştirme)
     promptStr = ['Sen profesyonel bir İK Yapay Zeka asistanısın.', char(10), ...
         'Aşağıda sana verilen aday özgeçmişini (CV), belirtilen iş ilanı kriterlerine göre değerlendir.', char(10), char(10), ...
         '[İş İlanı Kriterleri]: ', char(jobDescription), char(10), ...
@@ -28,7 +27,7 @@ function responseText = evaluateResumeWithLLM(resumeText, jobDescription)
         apiResponse = webwrite(apiUrl, requestBody, options);
         rawText = apiResponse.candidates(1).content.parts(1).text;
         
-        % --- KURŞUN GEÇİRMEZ JSON YAKALAYICI (JSON CATCHER) ---
+        % JSON CATCHER
         startIndex = strfind(rawText, '{');
         endIndex = strfind(rawText, '}');
         

@@ -1,4 +1,4 @@
-%% AKILLI İK CV DEĞERLENDİRME SİSTEMİ (MATLAB ZIRHLI SÜRÜM)
+%% AKILLI İK CV DEĞERLENDİRME SİSTEMİ 
 clear; clc;
 
 % 1. Veri Setinin Yüklenmesi
@@ -13,7 +13,7 @@ fprintf('Kaggle Veri Seti Başarıyla Yüklendi. Toplam Kayıt: %d\n', height(ra
 % 2. İş İlanı Kriterleri
 jobDescription = "3rd year software engineering student familiar with C#, Node.js, HTML, and database design.";
 
-% Performans için ilk 3 adayı değerlendiriyoruz
+% Performans için ilk 10 adayı değerlendirme
 numCandidates = 10; 
 evaluatedCandidates = cell(numCandidates, 1);
 
@@ -38,7 +38,6 @@ for i = 1:numCandidates
         jsonRaw = evaluateResumeWithLLM(cleanedResume, jobDescription);
         parsedStruct = jsondecode(jsonRaw);
         
-        % --- ZIRHLI STRUCT OLUŞTURUCU ---
         % Yapay zeka JSON içindeki isimlendirmeleri değiştirirse bile sistemin çökmesini engeller.
         outStruct = struct();
         outStruct.Aday_ID = i;
